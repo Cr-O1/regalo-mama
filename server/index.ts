@@ -27,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 // This is required in both development and production because Vite's public assets only
 // include files under `client/public`.
 app.use("/fotos", express.static(path.resolve(process.cwd(), "fotos"), { fallthrough: false }));
+app.use("/perra", express.static(path.resolve(process.cwd(), "perra"), { fallthrough: false }));
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
