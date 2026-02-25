@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+import path from "path";
 
 const app = express();
 const httpServer = createServer(app);
@@ -21,6 +22,11 @@ app.use(
 );
 
 app.use(express.urlencoded({ extended: false }));
+
+// Serve user-provided media files (photos/videos) from the repo-level `fotos` directory.
+// This is required in both development and production because Vite's public assets only
+// include files under `client/public`.
+app.use("/fotos", express.static(path.resolve(process.cwd(), "fotos"), { fallthrough: false }));
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
