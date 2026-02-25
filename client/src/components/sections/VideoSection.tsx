@@ -31,7 +31,7 @@ export function VideoSection({ onNext }: VideoSectionProps) {
         className="max-w-2xl w-full aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black mb-12"
       >
         <video 
-          src="/fotos/videoperrasaltando/20260220_132553.mp4" 
+          src={encodeURI("/perra/20260220_132553 (2) (1).mp4")} 
           controls 
           autoPlay 
           muted 
