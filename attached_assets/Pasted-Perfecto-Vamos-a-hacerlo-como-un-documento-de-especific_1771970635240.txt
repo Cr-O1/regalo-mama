@@ -1,0 +1,220 @@
+Perfecto. Vamos a hacerlo **como un documento de especificaciones claras**, para que el **agent de Replit** entienda exactamente **qué construir, cómo debe comportarse y qué no puede faltar**.
+
+Puedes **copiar y pegar esto tal cual** en Replit y decirle:
+
+> *“Implementa exactamente estas funcionalidades”*.
+
+---
+
+# 📄 Especificación del Proyecto
+
+## Página Web Personalizada de Cumpleaños (Regalo para mi madre)
+
+---
+
+## 🎯 Objetivo del proyecto
+
+Crear una **página web estática e interactiva**, emotiva y visualmente cuidada, que funcione como regalo de cumpleaños para mi madre.
+Debe transmitir cariño, gratitud y dedicación, usando animaciones suaves, textos personalizados y una experiencia fluida.
+
+No debe ser genérica ni técnica: **debe sentirse humana y emocional**.
+
+---
+
+## 🧱 Tecnologías requeridas
+
+* **HTML5** para la estructura
+* **CSS3** para estilos y animaciones
+* **JavaScript (vanilla)** para interactividad
+* No usar frameworks pesados (React, Vue, etc.)
+* Todo debe funcionar **offline** (sin APIs externas obligatorias)
+
+---
+
+## 🖥️ Estructura general de la web
+
+La web será **una sola página (SPA)** dividida en secciones que se muestran u ocultan dinámicamente con animaciones.
+
+### Secciones principales:
+
+1. Pantalla de bienvenida
+2. Sección de mensaje principal
+3. Sección de recuerdos
+4. Sección interactiva (contador / sorpresa)
+5. Pantalla final de felicitación
+
+---
+
+## 1️⃣ Pantalla de Bienvenida
+
+### Funcionalidad
+
+* Ocupa toda la pantalla al cargar la web
+* Fondo elegante (color suave, degradado o imagen desenfocada)
+* Texto centrado:
+
+  * “Feliz cumpleaños, mamá”
+  * Subtítulo: “Hecho con todo mi cariño”
+* Botón principal: **“Entrar”**
+
+### Comportamiento
+
+* Al pulsar el botón:
+
+  * Animación suave de transición (fade o slide)
+  * Se oculta esta pantalla
+  * Se muestra la siguiente sección
+* No debe recargar la página
+
+---
+
+## 2️⃣ Sección de Mensaje Principal
+
+### Funcionalidad
+
+* Texto emotivo personalizado (párrafos escritos por el usuario)
+* El texto debe aparecer con **efecto máquina de escribir**
+* Posibilidad de incluir una imagen (opcional)
+
+### Comportamiento
+
+* El texto aparece progresivamente
+* No se puede avanzar hasta que termine la animación
+* Botón: **“Siguiente”**
+
+---
+
+## 3️⃣ Sección de Recuerdos
+
+### Funcionalidad
+
+Mostrar recuerdos importantes de forma visual.
+
+Opciones válidas (pueden combinarse):
+
+* Tarjetas con:
+
+  * Año o etapa
+  * Título corto
+  * Texto descriptivo
+* O lista interactiva donde cada recuerdo se expande al hacer clic
+
+### Comportamiento
+
+* Las tarjetas aparecen con animación al entrar en pantalla
+* Al hacer clic en un recuerdo:
+
+  * Se expande suavemente
+  * Muestra el texto completo
+* Botón: **“Continuar”**
+
+---
+
+## 4️⃣ Sección Interactiva (Elemento Emocional Clave)
+
+### Funcionalidad
+
+Un elemento interactivo que refuerce el mensaje emocional.
+
+Ejemplo recomendado:
+
+* Botón: **“Pulsa aquí”**
+* Al pulsarlo:
+
+  * Aparece un contador animado con un mensaje tipo:
+
+    > “Te quiero más de 1.000 razones”
+  * O frases que cambian cada vez que se pulsa
+
+### Comportamiento
+
+* Animación clara y fluida
+* El contenido no debe repetirse fácilmente
+* El usuario debe sentir sorpresa
+
+---
+
+## 5️⃣ Pantalla Final – Felicitación
+
+### Funcionalidad
+
+* Mensaje final grande y claro:
+
+  * “Feliz cumpleaños”
+  * “Te quiero muchísimo”
+* Firma:
+
+  * “Con amor, [mi nombre]”
+
+### Extras visuales
+
+* Animación final:
+
+  * Confeti
+  * Corazones
+  * Flores flotando
+* Música suave opcional (con botón de activar/desactivar)
+
+---
+
+## 🎨 Estilo visual (MUY IMPORTANTE)
+
+* Colores suaves y agradables
+* Tipografías legibles y elegantes
+* Nada agresivo, nada infantil
+* Animaciones:
+
+  * Suaves
+  * No bruscas
+  * No excesivas
+* Diseño responsive (funciona en móvil y ordenador)
+
+---
+
+## 🔊 Audio (opcional pero recomendado)
+
+* Música de fondo suave
+* No debe reproducirse automáticamente sin permiso
+* Botón visible:
+
+  * “🔊 Música ON / OFF”
+
+---
+
+## 🧠 Experiencia de usuario (UX)
+
+* Navegación clara
+* Un solo botón de acción visible por sección
+* No saturar de texto
+* El foco es emocional, no técnico
+
+---
+
+## ❌ Restricciones
+
+* No usar librerías externas innecesarias
+* No usar anuncios
+* No usar contenido genérico
+* No mostrar errores técnicos al usuario
+
+---
+
+## ✅ Resultado esperado
+
+Una página web:
+
+* Bonita
+* Emotiva
+* Fluida
+* Claramente hecha con dedicación
+* Que una madre pueda entender y disfrutar sin saber de tecnología
+
+---
+
+Si quieres, en el próximo mensaje puedo:
+
+* Ajustarlo **exactamente** al nivel del agent de Replit
+* O darte el **prompt perfecto** para que lo genere todo de una vez
+* O ayudarte a **personalizar los textos** para que sea aún más emotivo
+
+Tú mandas 💙
