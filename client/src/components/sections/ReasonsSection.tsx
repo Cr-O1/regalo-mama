@@ -54,12 +54,12 @@ export function ReasonsSection({ onNext }: ReasonsSectionProps) {
         Razones por las que te quiero
       </motion.h2>
 
-      <div className="glass-panel p-8 md:p-12 rounded-[2rem] w-full min-h-[250px] flex flex-col items-center justify-center mb-12 relative overflow-hidden">
+      <div className="glass-panel p-10 md:p-16 rounded-[3rem] w-full min-h-[300px] flex flex-col items-center justify-center mb-16 relative overflow-hidden shadow-2xl">
         {!hasClicked ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-xl text-muted-foreground italic font-serif"
+            className="text-2xl text-muted-foreground italic font-serif"
           >
             Descubre por qué eres tan especial...
           </motion.div>
@@ -67,11 +67,11 @@ export function ReasonsSection({ onNext }: ReasonsSectionProps) {
           <AnimatePresence mode="wait">
             <motion.p
               key={currentIndex}
-              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 1.05, y: -10 }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl md:text-3xl leading-relaxed text-primary font-serif font-medium"
+              exit={{ opacity: 0, scale: 1.1, y: -20 }}
+              transition={{ type: "spring", damping: 20, stiffness: 100 }}
+              className="text-3xl md:text-5xl leading-tight text-primary font-serif font-medium tracking-tight"
             >
               "{REASONS[currentIndex]}"
             </motion.p>

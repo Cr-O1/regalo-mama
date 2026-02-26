@@ -98,7 +98,7 @@ export function FinalSection({ audioInstance }: FinalSectionProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1.5 }}
-        className="text-2xl md:text-4xl text-primary font-serif italic mb-16"
+        className="text-3xl md:text-5xl text-primary font-serif italic mb-20 tracking-tight"
       >
         Te quiero muchísimo.
       </motion.p>
@@ -107,9 +107,9 @@ export function FinalSection({ audioInstance }: FinalSectionProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5, duration: 1 }}
-        className="flex flex-col items-center gap-8"
+        className="flex flex-col items-center gap-10"
       >
-        <p className="text-muted-foreground font-medium tracking-widest uppercase text-sm">
+        <p className="text-muted-foreground font-semibold tracking-[0.2em] uppercase text-xs opacity-70">
           Con amor, Carlos
         </p>
 

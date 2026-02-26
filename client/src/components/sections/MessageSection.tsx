@@ -21,18 +21,18 @@ export function MessageSection({ onNext }: MessageSectionProps) {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="flex flex-col items-center justify-center min-h-[80vh] max-w-2xl mx-auto px-6 text-center"
     >
-      <div className="glass-panel p-8 md:p-12 rounded-[2rem] w-full min-h-[300px] flex flex-col justify-center relative">
-        <div className="absolute top-6 left-6 text-4xl text-primary/20 font-serif">"</div>
-        <div className="absolute bottom-6 right-6 text-4xl text-primary/20 font-serif rotate-180">"</div>
+      <div className="glass-panel p-10 md:p-16 rounded-[3rem] w-full min-h-[350px] flex flex-col justify-center relative shadow-2xl">
+        <div className="absolute top-8 left-8 text-6xl text-primary/10 font-serif opacity-50">"</div>
+        <div className="absolute bottom-8 right-8 text-6xl text-primary/10 font-serif rotate-180 opacity-50">"</div>
         
-        <p className="text-xl md:text-3xl leading-relaxed text-foreground/90 font-serif">
+        <div className="text-2xl md:text-4xl leading-relaxed text-foreground/90 font-serif tracking-tight">
           <TypewriterText 
             text={message} 
             speed={45} 
             delay={500}
             onComplete={() => setIsTypingComplete(true)} 
           />
-        </p>
+        </div>
       </div>
 
       <motion.div

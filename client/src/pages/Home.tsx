@@ -39,7 +39,9 @@ export default function Home() {
   return (
     <main className="min-h-screen relative overflow-hidden flex flex-col justify-center py-12">
       {/* Soft animated background elements */}
-      <div className="bg-blobs" />
+      <div className="bg-blobs">
+        <div className="bg-blob-3" />
+      </div>
       
       <div className="container mx-auto relative z-10">
         <AnimatePresence mode="wait">
