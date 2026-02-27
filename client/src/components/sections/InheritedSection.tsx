@@ -7,7 +7,15 @@ interface InheritedSectionProps {
   onNext: () => void;
 }
 
-const INHERITED_QUALITIES = [
+interface InheritedQuality {
+  id: string;
+  icon: JSX.Element;
+  title: string;
+  description: string;
+  color: string;
+}
+
+const INHERITED_QUALITIES: InheritedQuality[] = [
   {
     id: "strength",
     icon: <Shield className="w-8 h-8" />,
