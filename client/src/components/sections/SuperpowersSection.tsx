@@ -32,8 +32,8 @@ const SUPERPOWERS = [
   {
     id: "radar",
     icon: <Zap className="w-8 h-8" />,
-    title: "Radar de Mentiras",
-    description: "Esa capacidad increíble de saber cómo estoy antes incluso de que yo lo sepa.",
+    title: "Amor Incondicional Infinito",
+    description: "Por sacrificar hasta el último céntimo por mí, por quererme con todas tus fuerzas sin importar lo que haga, y por derramar cada gota de sudor para que no me haga falta nada",
     color: "text-yellow-500"
   },
   {
