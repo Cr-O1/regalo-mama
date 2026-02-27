@@ -7,15 +7,7 @@ interface InheritedSectionProps {
   onNext: () => void;
 }
 
-interface InheritedQuality {
-  id: string;
-  icon: JSX.Element;
-  title: string;
-  description: string;
-  color: string;
-}
-
-const INHERITED_QUALITIES: InheritedQuality[] = [
+const INHERITED_QUALITIES = [
   {
     id: "strength",
     icon: <Shield className="w-8 h-8" />,
@@ -36,14 +28,7 @@ const INHERITED_QUALITIES: InheritedQuality[] = [
     title: "Tu manera de amar",
     description: "De ti heredé que el amor de verdad está en los detalles y en estar siempre presentes.",
     color: "text-red-500"
-  },
-  {
-    id: "beauty",
-    icon: <Sparkles className="w-8 h-8" />,
-    title: "Tu belleza",
-    description: "Me miro al espejo y entiendo de dónde viene lo mejor de mí: tu sonrisa, tu mirada y esa luz que llevas dentro… al final, me parezco a ti. Somos como dos gotas de agua.",
-    color: "text-fuchsia-500"
-  },
+  }
 ];
 
 export function InheritedSection({ onNext }: InheritedSectionProps) {
@@ -74,7 +59,7 @@ export function InheritedSection({ onNext }: InheritedSectionProps) {
         Todo lo mejor de mí tiene un poquito de ti
       </motion.p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-10">
         {INHERITED_QUALITIES.map((quality) => (
           <motion.button
             key={quality.id}
