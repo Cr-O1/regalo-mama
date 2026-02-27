@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Heart, Shield, Sparkles, HandHeart } from "lucide-react";
+import { ArrowLeft, ArrowRight, Heart, Shield, Sparkles, HandHeart, Star } from "lucide-react";
 import { GlassButton } from "@/components/ui/GlassButton";
 
 interface InheritedSectionProps {
   onNext: () => void;
+  onBack: () => void;
 }
 
 const INHERITED_QUALITIES = [
@@ -28,10 +29,17 @@ const INHERITED_QUALITIES = [
     title: "Tu manera de amar",
     description: "De ti heredé que el amor de verdad está en los detalles y en estar siempre presentes.",
     color: "text-red-500"
+  },
+  {
+    id: "beauty",
+    icon: <Star className="w-8 h-8" />,
+    title: "Tu belleza",
+    description: "Me miro al espejo y entiendo de dónde viene lo mejor de mí: tu sonrisa, tu mirada y esa luz que llevas dentro… al final, me parezco a ti. Somos como dos gotas de agua.",
+    color: "text-amber-500"
   }
 ];
 
-export function InheritedSection({ onNext }: InheritedSectionProps) {
+export function InheritedSection({ onNext, onBack }: InheritedSectionProps) {
   const [selectedId, setSelectedId] = useState<string | null>(INHERITED_QUALITIES[0].id);
 
   return (
@@ -59,7 +67,7 @@ export function InheritedSection({ onNext }: InheritedSectionProps) {
         Todo lo mejor de mí tiene un poquito de ti
       </motion.p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full mb-10">
         {INHERITED_QUALITIES.map((quality) => (
           <motion.button
             key={quality.id}
@@ -95,9 +103,17 @@ export function InheritedSection({ onNext }: InheritedSectionProps) {
         </AnimatePresence>
       </div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-12">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="mt-12 flex items-center gap-4"
+      >
+        <GlassButton variant="secondary" onClick={onBack} icon={<ArrowLeft className="w-4 h-4" />}>
+          Atrás
+        </GlassButton>
         <GlassButton onClick={onNext} icon={<ArrowRight className="w-4 h-4" />}>
-          Continuar
+          Siguiente
         </GlassButton>
       </motion.div>
     </motion.div>

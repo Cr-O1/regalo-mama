@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import { GlassButton } from "@/components/ui/GlassButton";
 
 interface ReasonsSectionProps {
   onNext: () => void;
+  onBack: () => void;
 }
 
 const REASONS = [
@@ -29,7 +30,7 @@ const REASONS = [
   "Porque tu amor es el más sincero y fuerte que conozco."
 ];
 
-export function ReasonsSection({ onNext }: ReasonsSectionProps) {
+export function ReasonsSection({ onNext, onBack }: ReasonsSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [hasClicked, setHasClicked] = useState(false);
 
@@ -87,9 +88,13 @@ export function ReasonsSection({ onNext }: ReasonsSectionProps) {
         <AnimatePresence>
           {hasClicked && currentIndex >= 2 && (
             <motion.div
-              initial={{ opacity: 0, w: 0 }}
-              animate={{ opacity: 1, w: "auto" }}
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: "auto" }}
+              className="flex items-center gap-4"
             >
+              <GlassButton variant="secondary" onClick={onBack} icon={<ArrowLeft className="w-4 h-4" />}>
+                Atrás
+              </GlassButton>
               <GlassButton variant="secondary" onClick={onNext} icon={<ArrowRight className="w-4 h-4" />}>
                 Siguiente
               </GlassButton>

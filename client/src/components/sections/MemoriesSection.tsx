@@ -1,15 +1,16 @@
 import { motion, AnimatePresence } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
-import { ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { GlassButton } from "@/components/ui/GlassButton";
 import { useMemories } from "@/hooks/use-memories";
 import { useCallback, useEffect, useState } from "react";
 
 interface MemoriesSectionProps {
   onNext: () => void;
+  onBack: () => void;
 }
 
-export function MemoriesSection({ onNext }: MemoriesSectionProps) {
+export function MemoriesSection({ onNext, onBack }: MemoriesSectionProps) {
   const { data: memories, isLoading } = useMemories();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: "center" });
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -167,10 +168,13 @@ export function MemoriesSection({ onNext }: MemoriesSectionProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.8 }}
-        className="mt-16"
+        className="mt-16 flex items-center gap-4"
       >
+        <GlassButton variant="secondary" onClick={onBack} icon={<ArrowLeft className="w-4 h-4" />}>
+          Atrás
+        </GlassButton>
         <GlassButton onClick={onNext} icon={<ArrowRight className="w-4 h-4" />}>
-          Continuar
+          Siguiente
         </GlassButton>
       </motion.div>
     </motion.div>
