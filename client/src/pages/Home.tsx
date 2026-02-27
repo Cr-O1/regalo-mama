@@ -4,6 +4,7 @@ import { WelcomeSection } from "@/components/sections/WelcomeSection";
 import { MessageSection } from "@/components/sections/MessageSection";
 import { MemoriesSection } from "@/components/sections/MemoriesSection";
 import { ReasonsSection } from "@/components/sections/ReasonsSection";
+import { SuperpowersSection } from "@/components/sections/SuperpowersSection";
 import { VideoSection } from "@/components/sections/VideoSection";
 import { FinalSection } from "@/components/sections/FinalSection";
 
@@ -49,8 +50,9 @@ export default function Home() {
           {step === 1 && <MessageSection key="step-1" onNext={() => setStep(2)} />}
           {step === 2 && <MemoriesSection key="step-2" onNext={() => setStep(3)} />}
           {step === 3 && <ReasonsSection key="step-3" onNext={() => setStep(4)} />}
-          {step === 4 && <VideoSection key="step-video" onNext={() => setStep(5)} />}
-          {step === 5 && <FinalSection key="step-4" audioInstance={audioRef.current} />}
+          {step === 4 && <SuperpowersSection key="step-superpowers" onNext={() => setStep(5)} />}
+          {step === 5 && <VideoSection key="step-video" onNext={() => setStep(6)} />}
+          {step === 6 && <FinalSection key="step-4" audioInstance={audioRef.current} />}
         </AnimatePresence>
       </div>
     </main>
