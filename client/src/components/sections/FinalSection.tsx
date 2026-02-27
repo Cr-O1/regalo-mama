@@ -1,141 +1,203 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Heart, Shield, Sparkles, HandHeart, Star } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Confetti from "react-confetti";
+import { Download, Heart, Music, Music2 } from "lucide-react";
 import { GlassButton } from "@/components/ui/GlassButton";
 
-interface InheritedSectionProps {
-  onNext: () => void;
-  onBack: () => void;
+interface FinalSectionProps {
+  audioInstance?: HTMLAudioElement | null;
 }
 
-const INHERITED_QUALITIES = [
-  {
-    id: "strength",
-    icon: <Shield className="w-8 h-8" />,
-    title: "Tu fortaleza",
-    description: "Aprendí de ti a levantarme incluso en los días más difíciles, sin rendirme nunca.",
-    color: "text-blue-500"
-  },
-  {
-    id: "kindness",
-    icon: <HandHeart className="w-8 h-8" />,
-    title: "Tu bondad",
-    description: "Tu forma de cuidar y ayudar a los demás me enseñó a tener siempre el corazón abierto.",
-    color: "text-rose-500"
-  },
-  {
-    id: "love",
-    icon: <Heart className="w-8 h-8" />,
-    title: "Tu manera de amar",
-    description: "De ti heredé que el amor de verdad está en los detalles y en estar siempre presentes.",
-    color: "text-red-500"
-  },
-  {
-    id: "beauty",
-    icon: <Star className="w-8 h-8" />,
-    title: "Tu belleza",
-    description:
-      "Me miro al espejo y entiendo de dónde viene lo mejor de mí: tu sonrisa, tu mirada y esa luz que llevas dentro… al final, me parezco a ti. Somos como dos gotas de agua.",
-    color: "text-amber-500"
-  }
-];
+export function FinalSection({ audioInstance }: FinalSectionProps) {
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isCreatingCollage, setIsCreatingCollage] = useState(false);
 
-export function InheritedSection({ onNext, onBack }: InheritedSectionProps) {
-  const [selectedId, setSelectedId] = useState<string | null>(
-    INHERITED_QUALITIES[0].id
-  );
+  const COUPLE_PHOTOS = [
+    "/fotos/fotoconmimadre/IMG-20251213-WA0002.jpg",
+    "/fotos/fotoconmimadre/IMG-20250124-WA0001.jpg",
+    "/fotos/fotoconmimadre/IMG-20250201-WA0007.jpg"
+  ];
+
+  useEffect(() => {
+    // Set window size for confetti
+    const updateSize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    
+    // Check initial playing state if instance provided
+    if (audioInstance) {
+      setIsPlaying(!audioInstance.paused);
+    }
+
+    return () => {
+      window.removeEventListener("resize", updateSize);
+    };
+  }, [audioInstance]);
+
+  const toggleMusic = () => {
+    if (!audioInstance) return;
+    
+    if (isPlaying) {
+      audioInstance.pause();
+    } else {
+      audioInstance.play().catch(e => console.warn("Audio play failed:", e));
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+
+  const createCollage = async () => {
+    try {
+      setIsCreatingCollage(true);
+
+      const loadImage = (src: string) =>
+        new Promise<HTMLImageElement>((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = () => reject(new Error(`No se pudo cargar la imagen: ${src}`));
+          img.src = src;
+        });
+
+      const images = await Promise.all(COUPLE_PHOTOS.map(loadImage));
+
+      const canvas = document.createElement("canvas");
+      const cols = 2;
+      const rows = Math.ceil(images.length / cols);
+      const cellSize = 900;
+      canvas.width = cols * cellSize;
+      canvas.height = rows * cellSize;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      images.forEach((img, index) => {
+        const col = index % cols;
+        const row = Math.floor(index / cols);
+        const x = col * cellSize;
+        const y = row * cellSize;
+
+        const scale = Math.max(cellSize / img.width, cellSize / img.height);
+        const drawWidth = img.width * scale;
+        const drawHeight = img.height * scale;
+        const dx = x + (cellSize - drawWidth) / 2;
+        const dy = y + (cellSize - drawHeight) / 2;
+
+        ctx.drawImage(img, dx, dy, drawWidth, drawHeight);
+      });
+
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "collage-mama-e-hijo.png";
+        link.click();
+        URL.revokeObjectURL(url);
+      }, "image/png");
+    } catch (error) {
+      console.warn("Collage creation failed:", error);
+    } finally {
+      setIsCreatingCollage(false);
+    }
+  };
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -50 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-4xl mx-auto px-6"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="flex flex-col items-center justify-center min-h-[80vh] w-full text-center px-4 relative"
     >
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-3xl md:text-5xl font-serif text-center mb-4 text-foreground"
-      >
-        Lo que heredé de ti
-      </motion.h2>
+      <Confetti
+        width={windowSize.width}
+        height={windowSize.height}
+        colors={['#ffb3c6', '#ffc2d1', '#ffe5ec', '#fb6f92', '#ff8fab']}
+        recycle={false}
+        numberOfPieces={400}
+        gravity={0.15}
+      />
 
-      <motion.p
+      <motion.div
+        animate={{ 
+          scale: [1, 1.1, 1],
+        }}
+        transition={{ 
+          duration: 2, 
+          repeat: Infinity,
+          ease: "easeInOut" 
+        }}
+        className="mb-8"
+      >
+        <Heart className="w-16 h-16 text-primary fill-primary/20" strokeWidth={1.5} />
+      </motion.div>
+      
+      <motion.h1 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 1 }}
+        className="text-5xl md:text-7xl font-serif text-foreground mb-6"
+      >
+        ¡Feliz Cumpleaños!
+      </motion.h1>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary/20 shadow-xl mb-8 relative"
+      >
+        <img 
+          src="/fotos/fotoconmimadre/IMG-20251213-WA0002.jpg" 
+          alt="Nosotros" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+      </motion.div>
+      
+      <motion.p 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="text-muted-foreground text-center mb-12"
+        transition={{ delay: 1.5, duration: 1.5 }}
+        className="text-3xl md:text-5xl text-primary font-serif italic mb-20 tracking-tight"
       >
-        Todo lo mejor de mí tiene un poquito de ti
+        Te quiero muchísimo.
       </motion.p>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 w-full mb-10">
-        {INHERITED_QUALITIES.map((quality) => (
-          <motion.button
-            key={quality.id}
-            whileHover={{ scale: 1.03, y: -4 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setSelectedId(quality.id)}
-            className={`glass-panel p-6 rounded-[2rem] flex flex-col items-center justify-center gap-4 transition-all duration-300 ${
-              selectedId === quality.id
-                ? "ring-2 ring-primary bg-white/60"
-                : "hover:bg-white/50"
-            }`}
-          >
-            <div className={`${quality.color} opacity-80`}>
-              {quality.icon}
-            </div>
-            <span className="text-lg font-semibold text-foreground/90 text-center">
-              {quality.title}
-            </span>
-          </motion.button>
-        ))}
-      </div>
-
-      <div className="min-h-[150px] w-full flex items-center justify-center">
-        <AnimatePresence mode="wait">
-          {selectedId && (
-            <motion.div
-              key={selectedId}
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 1.05 }}
-              className="glass-panel p-8 rounded-[2.5rem] w-full text-center shadow-xl"
-            >
-              <Sparkles className="w-5 h-5 text-primary/40 mx-auto mb-3" />
-              <p className="text-xl md:text-2xl text-foreground font-serif italic leading-relaxed">
-                {
-                  INHERITED_QUALITIES.find(
-                    (item) => item.id === selectedId
-                  )?.description
-                }
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="mt-12 flex items-center gap-4"
+        transition={{ delay: 2.5, duration: 1 }}
+        className="flex flex-col items-center gap-10"
       >
-        <GlassButton
-          variant="secondary"
-          onClick={onBack}
-          icon={<ArrowLeft className="w-4 h-4" />}
-        >
-          Atrás
-        </GlassButton>
+        <p className="text-muted-foreground font-semibold tracking-[0.2em] uppercase text-xs opacity-70">
+          Con amor, Carlos
+        </p>
 
-        <GlassButton
-          onClick={onNext}
-          icon={<ArrowRight className="w-4 h-4" />}
-        >
-          Siguiente
-        </GlassButton>
+        <div className="flex flex-col sm:flex-row gap-4 items-center">
+          <GlassButton 
+            variant="secondary" 
+            onClick={toggleMusic} 
+            icon={isPlaying ? <Music className="w-4 h-4" /> : <Music2 className="w-4 h-4" />}
+            className="opacity-80 hover:opacity-100"
+          >
+            {isPlaying ? "Pausar Música" : "Reproducir Música"}
+          </GlassButton>
+
+          <GlassButton
+            variant="secondary"
+            onClick={createCollage}
+            icon={<Download className="w-4 h-4" />}
+            className="opacity-80 hover:opacity-100"
+          >
+            {isCreatingCollage ? "Creando collage..." : "Crear collage"}
+          </GlassButton>
+        </div>
       </motion.div>
     </motion.div>
   );
