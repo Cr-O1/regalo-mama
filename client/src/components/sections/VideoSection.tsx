@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { GlassButton } from "@/components/ui/GlassButton";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface VideoSectionProps {
   onNext: () => void;
+  onBack: () => void;
 }
 
-export function VideoSection({ onNext }: VideoSectionProps) {
+export function VideoSection({ onNext, onBack }: VideoSectionProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -44,9 +45,13 @@ export function VideoSection({ onNext }: VideoSectionProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
+        className="flex items-center gap-4"
       >
+        <GlassButton variant="secondary" onClick={onBack} icon={<ArrowLeft className="w-4 h-4" />}>
+          Atrás
+        </GlassButton>
         <GlassButton onClick={onNext} icon={<ArrowRight className="w-4 h-4" />}>
-          Continuar
+          Siguiente
         </GlassButton>
       </motion.div>
     </motion.div>

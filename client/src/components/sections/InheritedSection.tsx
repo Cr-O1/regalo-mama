@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Heart, Shield, Sparkles, HandHeart } from "lucide-react";
+import { ArrowLeft, ArrowRight, Heart, Shield, Sparkles, HandHeart } from "lucide-react";
 import { GlassButton } from "@/components/ui/GlassButton";
 
 interface InheritedSectionProps {
   onNext: () => void;
+  onBack: () => void;
 }
 
 const INHERITED_QUALITIES = [
@@ -31,7 +32,7 @@ const INHERITED_QUALITIES = [
   }
 ];
 
-export function InheritedSection({ onNext }: InheritedSectionProps) {
+export function InheritedSection({ onNext, onBack }: InheritedSectionProps) {
   const [selectedId, setSelectedId] = useState<string | null>(INHERITED_QUALITIES[0].id);
 
   return (
@@ -95,9 +96,17 @@ export function InheritedSection({ onNext }: InheritedSectionProps) {
         </AnimatePresence>
       </div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-12">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="mt-12 flex items-center gap-4"
+      >
+        <GlassButton variant="secondary" onClick={onBack} icon={<ArrowLeft className="w-4 h-4" />}>
+          Atrás
+        </GlassButton>
         <GlassButton onClick={onNext} icon={<ArrowRight className="w-4 h-4" />}>
-          Continuar
+          Siguiente
         </GlassButton>
       </motion.div>
     </motion.div>

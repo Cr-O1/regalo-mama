@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { GlassButton } from "@/components/ui/GlassButton";
 import { TypewriterText } from "@/components/ui/TypewriterText";
 
 interface MessageSectionProps {
   onNext: () => void;
+  onBack: () => void;
 }
 
-export function MessageSection({ onNext }: MessageSectionProps) {
+export function MessageSection({ onNext, onBack }: MessageSectionProps) {
   const [isTypingComplete, setIsTypingComplete] = useState(false);
 
   const message = "Mamá, en este día tan especial quería regalarte algo diferente. Algo que pudieras guardar y mirar cada vez que quieras recordar lo muchísimo que te quiero. Gracias por darme la vida, por sacrificar todo por mí y por ser un ejemplo a seguir. Eres la mujer más fuerte, valiente y buena que conozco.";
@@ -42,9 +43,14 @@ export function MessageSection({ onNext }: MessageSectionProps) {
         className="mt-12 h-16"
       >
         {isTypingComplete && (
-          <GlassButton onClick={onNext} icon={<ArrowRight className="w-4 h-4" />}>
-            Siguiente
-          </GlassButton>
+          <div className="flex items-center gap-4">
+            <GlassButton variant="secondary" onClick={onBack} icon={<ArrowLeft className="w-4 h-4" />}>
+              Atrás
+            </GlassButton>
+            <GlassButton onClick={onNext} icon={<ArrowRight className="w-4 h-4" />}>
+              Siguiente
+            </GlassButton>
+          </div>
         )}
       </motion.div>
     </motion.div>
