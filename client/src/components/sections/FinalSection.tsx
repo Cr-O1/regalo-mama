@@ -43,8 +43,6 @@ export function FinalSection({ audioInstance, onBack }: FinalSectionProps) {
   };
 
 
-
-
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
