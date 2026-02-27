@@ -5,6 +5,7 @@ import {
   Utensils, 
   HeartHandshake, 
   Zap, 
+  ArrowLeft,
   ArrowRight,
   Sparkles
 } from "lucide-react";
@@ -12,6 +13,7 @@ import { GlassButton } from "@/components/ui/GlassButton";
 
 interface SuperpowersSectionProps {
   onNext: () => void;
+  onBack: () => void;
 }
 
 const SUPERPOWERS = [
@@ -45,7 +47,7 @@ const SUPERPOWERS = [
   }
 ];
 
-export function SuperpowersSection({ onNext }: SuperpowersSectionProps) {
+export function SuperpowersSection({ onNext, onBack }: SuperpowersSectionProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   return (
@@ -124,10 +126,13 @@ export function SuperpowersSection({ onNext }: SuperpowersSectionProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="mt-12"
+        className="mt-12 flex items-center gap-4"
       >
+        <GlassButton variant="secondary" onClick={onBack} icon={<ArrowLeft className="w-4 h-4" />}>
+          Atrás
+        </GlassButton>
         <GlassButton onClick={onNext} icon={<ArrowRight className="w-4 h-4" />}>
-          Continuar
+          Siguiente
         </GlassButton>
       </motion.div>
     </motion.div>
