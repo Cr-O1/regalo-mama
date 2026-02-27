@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Heart, Shield, Sparkles, HandHeart, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, Heart, Shield, Sparkles, HandHeart } from "lucide-react";
 import { GlassButton } from "@/components/ui/GlassButton";
 
 interface InheritedSectionProps {

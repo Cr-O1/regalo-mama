@@ -54,7 +54,7 @@ export default function Home() {
           {step === 4 && <InheritedSection key="step-inherited" onNext={() => setStep(5)} onBack={() => setStep(3)} />}
           {step === 5 && <SuperpowersSection key="step-superpowers" onNext={() => setStep(6)} onBack={() => setStep(4)} />}
           {step === 6 && <VideoSection key="step-video" onNext={() => setStep(7)} onBack={() => setStep(5)} />}
-          {step === 7 && <FinalSection key="step-4" audioInstance={audioRef.current} onBack={() => setStep(6)} />}
+          {step === 7 && <FinalSection key="step-4" audioInstance={audioRef.current} />}
         </AnimatePresence>
       </div>
     </main>
